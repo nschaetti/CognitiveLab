@@ -8,5 +8,6 @@ setup(
     license='GPL v3',
     author='nschaetti',
     author_email='nils.schaetti@unige.ch',
-    description='Manage and Analyse Output of Machine Learning Experiments'
+    description='Manage and Analyse Output of Machine Learning Experiments',
+    scripts=['scripts/cognitivelab']
 )
