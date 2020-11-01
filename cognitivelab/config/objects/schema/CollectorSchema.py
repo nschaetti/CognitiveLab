@@ -25,7 +25,7 @@
 #
 
 # Imports
-from marshmallow import Schema, fields, post_load
+from marshmallow import Schema, fields, post_load, validate
 
 
 # Schema for a collector in the configuration
@@ -34,6 +34,22 @@ class CollectorSchema(Schema):
     Schema for a collector in the configuration
     """
 
-    # Constructor
+    # region FIELDS
+
+    # Collector type
+    collector_type = fields.Str(
+        required=True,
+        allow_none=False,
+        validate=validate.OneOf(["local", "distant"])
+    )
+
+    # Collector destination
+    collector_destination = fields.Str(
+        required=True,
+        allow_none=False,
+        validate=validate.URL()
+    )
+
+    # endregion FIELDS
 
 # end CollectorSchema

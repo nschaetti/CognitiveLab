@@ -81,7 +81,7 @@ class Collector(object):
     @collector_destination.setter
     def collector_destination(self, value):
         """
-        Set collectot type
+        Set collector type
         :param value: New collector type
         """
         self._collector_destination = value
