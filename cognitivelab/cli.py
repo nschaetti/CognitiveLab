@@ -33,8 +33,6 @@ COGNITIVELAB_PROJECT_DIRS = [
     'data',
     'datasets',
     'lab',
-    'outputs',
-    'tests',
     'models'
 ]
 
@@ -53,7 +51,7 @@ def init(lab_name):
     """
     Init the current directory as a CognitiveLab project directory.
     """
-    # Check that thereis not .cognitivelabs presents
+    # Check that there is no .cognitivelabs directory
     if os.path.exists(COGNITIVELAB_PROJECT_MAIN_DIR):
         click.echo('Directory already initialised!')
     else:
@@ -75,6 +73,24 @@ def init(lab_name):
         # end for
     # end if
 # end help
+
+
+# Command to add a collector for experiments output
+@main.command("collector")
+@click.argument("collector_type")
+@click.argument("action")
+@click.argument("destination")
+def add_collector(collector_type, action, destination):
+    """
+    Add a collector to the project
+    :param collector_type: Type of collector (local, distant)
+    :param action: Action to perform (add, remove)
+    :param destination: Destination of the collector
+    """
+    print(collector_type)
+    print(action)
+    print(destination)
+# end add_collector
 
 
 @main.command("version")
