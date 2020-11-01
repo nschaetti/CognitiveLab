@@ -55,17 +55,37 @@ class Collector(object):
         :return: Collector type (local, distant)
         """
         return self._collector_type
-    # end collectot_type
+    # end collector_type
 
     # Set collector type
     @collector_type.setter
     def collector_type(self, value):
         """
-        Set collectot type
+        Set collector type
         :param value: New collector type
         """
         self._collector_type = value
-    # end collectot_type
+    # end collector_type
+
+    # Collector destination
+    @property
+    def collector_destination(self):
+        """
+        Get collector type
+        :return: Collector type (local, distant)
+        """
+        return self._collector_destination
+    # end collector_destination
+
+    # Set collector type
+    @collector_destination.setter
+    def collector_destination(self, value):
+        """
+        Set collectot type
+        :param value: New collector type
+        """
+        self._collector_destination = value
+    # end collector_destination
 
     # endregion PROPERTIES
 
