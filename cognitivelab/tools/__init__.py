@@ -1,5 +1,5 @@
-# File : config/__init__.py
-# Description : Repository configuration package init file
+# File : tools/__init__.py
+# Description : Subpackage tools init file
 # Author : Nils Schaetti <n.schaetti@gmail.com>
 # Date : 01.11.2020 23:44:00
 # Location : Nyon, Switzerland
@@ -21,9 +21,4 @@
 # Nils Schaetti <nils.schaetti@unige.ch>
 #
 
-# Imports
-from .Config import Config
-from .objects import *
 
-# ALL
-__all__ = ['Config', 'objects']

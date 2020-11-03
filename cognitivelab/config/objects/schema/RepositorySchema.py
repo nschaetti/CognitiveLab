@@ -27,6 +27,8 @@
 
 # Imports
 from marshmallow import Schema, fields, post_load, validate
+from cognitivelab.config.objects import Repository
+from .CollectorSchema import CollectorSchema
 
 
 # Schema for a repository in the configuration
@@ -44,8 +46,10 @@ class RepositorySchema(Schema):
     )
 
     # Repository collectors
-    repo_collectors = fields.Nested(
-        CollectorSchema,
+    repo_collectors = fields.List(
+        fields.Nested(
+            CollectorSchema
+        ),
         required=True,
         allow_none=False
     )
@@ -54,8 +58,16 @@ class RepositorySchema(Schema):
 
     # region PRIVATE
 
-    #
-
-    # endregion PRIVATE
+    # Create Repository object
+    @post_load
+    def _create_repository(self, data, **kwargs):
+        """
+        Create Collector object
+        :param data:
+        :param kwargs:
+        :return:
+        """
+        return Repository(**data)
+    # end _create_repository
 
 # end RepositorySchema

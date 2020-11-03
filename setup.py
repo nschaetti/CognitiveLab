@@ -15,7 +15,7 @@ try:
     from pipenv.utils import convert_deps_to_pip
 except:
     exit_msg = (
-        "pipenv is required to package Streamlit. Please install pipenv and try again"
+        "pipenv is required to package CognitiveLab. Please install pipenv and try again"
     )
     sys.exit(exit_msg)
 # end try
@@ -24,7 +24,7 @@ except:
 VERSION = "0.1.0"  # PEP-440
 
 # Package name
-NAME = "cognitivelab"
+NAME = "CognitiveLab"
 
 # Package description
 DESCRIPTION = "The fastest way to save and analyse Machine Learning experiments in Python"
@@ -44,15 +44,18 @@ requirements = convert_deps_to_pip(packages, r=False)
 
 # Setup
 setup(
-    name='CognitiveLab',
-    version='1.0',
-    packages=['cognitivelab'],
+    name=NAME,
+    version=VERSION,
+    description=DESCRIPTION,
+    long_description=LONG_DESCRIPTION,
     url='https://github.com/nschaetti/CognitiveLab',
-    license='GPL v3',
     author='nschaetti',
     author_email='nils.schaetti@unige.ch',
-    description='Manage and Analyse Output of Machine Learning Experiments',
+    python_requires=">=3.6",
+    license='GPL v3',
+    packages=setuptools.find_packages(exclude=['tests', 'tests.']),
     install_requires=requirements,
+    zip_safe=False,
     include_package_data=True,
     entry_points={"console_scripts": ["cognitivelab = cognitivelab.cli:main"]}
 )

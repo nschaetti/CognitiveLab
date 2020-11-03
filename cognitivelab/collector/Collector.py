@@ -25,6 +25,7 @@
 #
 
 # Imports
+import re
 
 
 # Base class for Collector classes
@@ -38,24 +39,64 @@ class Collector(object):
     COLLECTOT_INITIALIZED = 1
 
     # Constructor
-    def __init__(self, *args, **kwargs):
+    def __init__(self, destination):
         """
         Constructor
-        :param args: Positional arguments
-        :param kwargs: Arguments
+        :param destination: Destination of the collector
         """
-        pass
+        # Properties
+        self._destination = destination
     # end __init__
+
+    # region PROPERTIES
+
+    # Get destination
+    @property
+    def destination(self):
+        """
+        Get destination
+        :return: Collector destination
+        """
+        return self._destination
+    # end destination
+
+    # Set destination
+    @destination.setter
+    def destination(self, v):
+        """
+        Set destination
+        :return:
+        """
+        self._destination = v
+    # end destination
+
+    # endregion PROPERTIES
 
     # region PUBLIC
 
-    # Init the collector
-    def init(self):
+    # Open the collector
+    def open(self):
         """
-        Init the collector
+        open the collector
         """
         pass
-    # end init
+    # end open
+
+    # Close the collector
+    def close(self):
+        """
+        Close the collector
+        """
+        pass
+    # end close
+
+    # Validate that the collector is operational
+    def validate(self):
+        """
+        Validate that the collector is operational
+        """
+        pass
+    # end validate
 
     # Get collector status
     def status(self):
@@ -87,5 +128,30 @@ class Collector(object):
     # end experiment_status
 
     # endregion PUBLIC
+
+    # region STATIC
+
+    @staticmethod
+    def get_connection_infos(destination):
+        """
+        Get connection infos
+        :param destination: Destination string
+        :return:
+        """
+        # Regexes
+        url_rule = r'^(\w+)://([A-Za-z0-9\.]+):([0-9]+)/([A-Za-z0-9\.]+)$'
+
+        # Search for distant location in the destination
+        matches = re.findall(url_rule, destination)
+
+        # Check that we have on entry
+        if len(matches) != 1:
+            raise Exception("Error malformed distant location: {}".format(destination))
+        # end if
+
+        return matches[0]
+    # end get_connection_info
+
+    # endregion STATIC
 
 # end Collector

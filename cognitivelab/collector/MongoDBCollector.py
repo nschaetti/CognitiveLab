@@ -27,7 +27,9 @@
 
 # Imports
 from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure
 from .Collector import Collector
+from .CollectorFactory import collector_factory
 
 
 # Experiment data collector to MongoDB
@@ -37,20 +39,21 @@ class MongoDBCollector(Collector):
     """
 
     # Constructor
-    def __init__(self, host, port, db_name):
+    def __init__(self, destination):
         """
         Constructor
-        :param host: MongoDB server hostname
-        :param port: MongoDB port
-        :param db_name: MongoDB database
+        :param destination: Destination of the collector
         """
         # Super
-        super(MongoDBCollector, self).__init__()
+        super(MongoDBCollector, self).__init__(destination)
+
+        # Get connection info
+        proto, host, port, database_name = self.get_connection_infos(destination)
 
         # Properties
         self._host = host
-        self._port = port
-        self._db_name = db_name
+        self._port = int(port)
+        self._db_name = database_name
         self._client = None
         self._db = None
         self._connected = False
@@ -123,20 +126,48 @@ class MongoDBCollector(Collector):
 
     # region PUBLIC
 
-    # Init the collector
-    def init(self):
+    # Open the collector
+    def open(self):
         """
-        Init the collector
+        Open the collector
         """
         # Connection to MongoDB
-        self._client = MongoClient("{}:{}".format(self._host, self._port))
+        self._client = MongoClient(self._host, self._port, connect=True)
 
         # Get database
-        self._db = getattr(self._client, self._db_name)
+        self._db = self._client[self._db_name]
+
+        # The ismaster command is cheap and does not require auth.
+        try:
+            self._client.admin.command('ismaster')
+        except ConnectionFailure as e:
+            raise Exception("Error: Cannot connect to the MongoDB server: {}".format(e))
+        # end try
 
         # Connected
         self._connected = True
-    # end init
+    # end open
+
+    # Close the collector
+    def close(self):
+        """
+        Close the collector
+        """
+        # Disconnect
+        self._client.close()
+        self._connected = False
+    # end close
+
+    # Validate connector
+    def validate(self):
+        """
+        Validate connector
+        :return:
+        """
+        # Open and close the connection
+        self.open()
+        self.close()
+    # end validate
 
     # Get collector status
     def status(self):
@@ -154,3 +185,6 @@ class MongoDBCollector(Collector):
     # endregion PUBLIC
 
 # end MongoDBCollector
+
+# Register
+collector_factory.register_collector('mongodb', MongoDBCollector)

@@ -26,6 +26,7 @@
 
 # Imports
 from marshmallow import Schema, fields, post_load, validate
+from cognitivelab.config.objects import Collector
 
 
 # Schema for a collector in the configuration
@@ -46,10 +47,25 @@ class CollectorSchema(Schema):
     # Collector destination
     collector_destination = fields.Str(
         required=True,
-        allow_none=False,
-        validate=validate.URL()
+        allow_none=False
     )
 
     # endregion FIELDS
+
+    # region PRIVATE
+
+    # Create Collector object
+    @post_load
+    def _create_collector(self, data, **kwargs):
+        """
+        Create Collector object
+        :param data:
+        :param kwargs:
+        :return:
+        """
+        return Collector(**data)
+    # end _create_collector
+
+    # endregion PRIVATE
 
 # end CollectorSchema
