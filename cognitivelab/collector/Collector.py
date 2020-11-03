@@ -26,6 +26,7 @@
 
 # Imports
 import re
+from urllib.parse import urlparse
 
 
 # Base class for Collector classes
@@ -39,36 +40,59 @@ class Collector(object):
     COLLECTOT_INITIALIZED = 1
 
     # Constructor
-    def __init__(self, destination):
+    def __init__(self, collector_type, collector_connection_string):
         """
         Constructor
-        :param destination: Destination of the collector
+        :param collector_type: local or distant collector
+        :param collector_connection_string: Connection information for the collector
         """
         # Properties
-        self._destination = destination
+        self._collector_type = collector_type
+        self._collector_connection_string = collector_connection_string
     # end __init__
 
     # region PROPERTIES
 
-    # Get destination
+    # Collector type
     @property
-    def destination(self):
+    def collector_type(self):
         """
-        Get destination
+        Get collector type
+        :return: Collector type (local, distant)
+        """
+        return self._collector_type
+
+    # end collector_type
+
+    # Set collector type
+    @collector_type.setter
+    def collector_type(self, value):
+        """
+        Set collector type
+        :param value: New collector type
+        """
+        self._collector_type = value
+    # end collector_type
+
+    # Get collector_destination
+    @property
+    def collector_connection_string(self):
+        """
+        Get collector_connection_string
         :return: Collector destination
         """
-        return self._destination
-    # end destination
+        return self._collector_connection_string
+    # end collector_connection_string
 
-    # Set destination
-    @destination.setter
-    def destination(self, v):
+    # Set collector_destination
+    @collector_connection_string.setter
+    def collector_connection_string(self, v):
         """
-        Set destination
+        Set collector_connection_string
         :return:
         """
-        self._destination = v
-    # end destination
+        self._collector_connection_string = v
+    # end collector_connection_string
 
     # endregion PROPERTIES
 
@@ -89,14 +113,6 @@ class Collector(object):
         """
         pass
     # end close
-
-    # Validate that the collector is operational
-    def validate(self):
-        """
-        Validate that the collector is operational
-        """
-        pass
-    # end validate
 
     # Get collector status
     def status(self):
@@ -129,8 +145,24 @@ class Collector(object):
 
     # endregion PUBLIC
 
+    # region OVERRIDE
+
+    # Override equals
+    def __eq__(self, other):
+        """
+        Override equals
+        :param other:
+        :return:
+        """
+        return self._collector_type == other.collector_type and \
+               self._collector_connection_string == other.collector_connection_string
+    # end __eq__
+
+    # endregion OVERRIDE
+
     # region STATIC
 
+    # Extract host, port and db name from connection string
     @staticmethod
     def get_connection_infos(destination):
         """
@@ -138,18 +170,7 @@ class Collector(object):
         :param destination: Destination string
         :return:
         """
-        # Regexes
-        url_rule = r'^(\w+)://([A-Za-z0-9\.]+):([0-9]+)/([A-Za-z0-9\.]+)$'
-
-        # Search for distant location in the destination
-        matches = re.findall(url_rule, destination)
-
-        # Check that we have on entry
-        if len(matches) != 1:
-            raise Exception("Error malformed distant location: {}".format(destination))
-        # end if
-
-        return matches[0]
+        return urlparse(destination)
     # end get_connection_info
 
     # endregion STATIC

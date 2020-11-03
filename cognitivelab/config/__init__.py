@@ -23,7 +23,7 @@
 
 # Imports
 from .Config import Config
-from .objects import *
+from .Repository import Repository
 
 # ALL
-__all__ = ['Config', 'objects']
+__all__ = ['Config', 'Repository']

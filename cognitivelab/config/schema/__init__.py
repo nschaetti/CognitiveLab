@@ -1,5 +1,5 @@
-# File : config/objects/__init__.py
-# Description : config/objects package init file
+# File : config/objects/schema/__init__.py
+# Description : config/objects/schema package init file
 # Author : Nils Schaetti <n.schaetti@gmail.com>
 # Date : 01.11.2020 23:44:00
 # Location : Nyon, Switzerland
@@ -22,9 +22,7 @@
 #
 
 # Imports
-from .Collector import Collector
-from .Repository import Repository
-from .schema import *
+from .RepositorySchema import RepositorySchema
 
 # ALL
-__all__ = ['Collector', 'Repository', 'schema']
+__all__ = ['RepositorySchema']

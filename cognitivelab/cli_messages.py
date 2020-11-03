@@ -1,7 +1,10 @@
-# File : config/objects/schema/__init__.py
-# Description : config/objects/schema package init file
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# File : cli_messages.py
+# Description : Command line messages and errors
 # Author : Nils Schaetti <n.schaetti@gmail.com>
-# Date : 01.11.2020 23:44:00
+# Date : 03.11.2020 12:26:00
 # Location : Nyon, Switzerland
 #
 # This file is part of the CognitiveLab package.
@@ -18,12 +21,10 @@
 # You should have received a copy of the GNU General Public License
 # along with CognitiveLab.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Nils Schaetti <nils.schaetti@unige.ch>
-#
 
-# Imports
-from .CollectorSchema import CollectorSchema
-from .RepositorySchema import RepositorySchema
+# Error messages
+Error_Messages = {
+    'REPO_NOT_INITIALIZED': "Error: cannot find repository configuration, is this repository initialized?",
+    'CANNOT_GET_COLLECTOR': "Error: cannot get collector with connection string \"{}\""
+}
 
-# ALL
-__all__ = ['CollectorSchema', 'RepositorySchema']

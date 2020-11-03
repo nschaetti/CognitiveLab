@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# File : config/RepositoryConfig.py
-# Description : Class to load, save and access repository configuration.
+# File : config/objects/Repository.py
+# Description : Represent a repository in the configuration
 # Author : Nils Schaetti <n.schaetti@gmail.com>
-# Date : 01.11.2020 23:21:00
+# Date : 01.11.2020 23:44:00
 # Location : Nyon, Switzerland
 #
 # This file is part of the CognitiveLab package.
@@ -28,10 +28,10 @@
 # Imports
 
 
-# Class to load, save and access repository configuration.
-class RepositoryConfig(object):
+# Represent a repository in the configuration
+class Repository(object):
     """
-    Class to load, save and access repository configuration.
+    Represent a repository in the configuration
     """
 
     # Constructor
@@ -98,15 +98,54 @@ class RepositoryConfig(object):
 
     # region PUBLIC
 
+    # Remove a collector
+    def remove_collector(self, collector_type, collector_connection_string):
+        """
+        Remove a collector
+        :param collector_type: Collector type
+        :param collector_connection_string: Connection string for this collector
+        :return:
+        """
+        # Target collector
+        target_collector = None
+
+        # Go through all collectors
+        for collector in self._repo_collectors:
+            if collector.collector_type == collector_type and \
+                collector.collector_connection_string == collector_connection_string:
+                target_collector = collector
+            # end if
+        # end for
+
+        # Remove from list
+        if target_collector is not None:
+            self._repo_collectors.remove(target_collector)
+        else:
+            raise Exception("Cannot remove collector, not found in repository!")
+        # end if
+    # end remove_collector
+
     # Add a collector
     def add_collector(self, collector):
         """
         Add a collector
         :param collector: A CollectorConfig object to be added
         """
-        self._repo_collectors.append(collector)
+        if collector not in self._repo_collectors:
+            self._repo_collectors.append(collector)
+        # end if
     # end add_collector
+
+    # Collector contained in the repository?
+    def contains_collector(self, collector):
+        """
+        Collector contained in the repository?
+        :param collector:
+        :return:
+        """
+        return collector in self._repo_collectors
+    # end contain_collectors
 
     # endregion PUBLIC
 
-# end RepositoryConfig
+# end Repository

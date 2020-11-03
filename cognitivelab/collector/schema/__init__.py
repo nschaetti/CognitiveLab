@@ -1,5 +1,5 @@
-# File : config/__init__.py
-# Description : Repository configuration package init file
+# File : collector/schema/__init__.py
+# Description : Init file for subpackage collector/schema
 # Author : Nils Schaetti <n.schaetti@gmail.com>
 # Date : 01.11.2020 23:44:00
 # Location : Nyon, Switzerland
@@ -22,11 +22,7 @@
 #
 
 # Imports
-from . import Collector
-from . import CollectorFactory
-from .CollectorFactory import collector_factory
-from . import MongoDBCollector
-from . import schema
+from .CollectorSchema import CollectorSchema
 
 # ALL
-__all__ = ['Collector', 'CollectorFactory', 'MongoDBCollector', 'collector_factory', 'schema']
+__all__ = ['CollectorSchema']

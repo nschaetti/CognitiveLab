@@ -24,8 +24,8 @@
 # Imports
 import os
 import json
-from .objects import Repository
-from .objects.schema import RepositorySchema
+from .Repository import Repository
+from .schema import RepositorySchema
 
 
 # Class to access and modify the repository configuration

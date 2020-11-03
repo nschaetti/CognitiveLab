@@ -27,7 +27,7 @@ import os
 import click
 from cognitivelab.collector import collector_factory
 from cognitivelab.config import Config
-from cognitivelab.config.objects import Collector as CollectorConfig
+from .cli_messages import Error_Messages
 
 
 # Directories to create in init phase
@@ -40,19 +40,25 @@ COGNITIVELAB_REPO_DIRS = [
 ]
 
 
-@click.group('main')
-def main():
+@click.group('main', chain=True)
+@click.pass_context
+def main(ctx):
     """
     Manage and analyse outputs of machine learning experiments
+    :param ctx: Context
     """
-    pass
+    # Create config object and add to context
+    ctx.obj = Config(repo_directory=".")
 # end main
 
 @main.command('init')
 @click.argument('repo_name')
-def init(repo_name):
+@click.pass_obj
+def init(repo_config, repo_name):
     """
     Init the current directory as a CognitiveLab project directory.
+    :param repo_config: Repository configuration
+    :param repo_name: Repository name for initialisation
     """
     # Check that there is no .cognitivelabs directory
     if os.path.exists(COGNITIVELAB_REPO_MAIN_DIR):
@@ -76,7 +82,6 @@ def init(repo_name):
         # end for
 
         # Initialize repository config
-        repo_config = Config(repo_directory=".")
         repo_config.init_repo(repo_name=repo_name)
     # end if
 # end help
@@ -84,51 +89,86 @@ def init(repo_name):
 
 # Command to add a collector for experiments output
 @main.command("collector")
-@click.argument("collector_type")
 @click.argument("action")
-@click.argument("destination")
-def collector(collector_type, action, destination):
+@click.argument("collector_type", required=False, default="")
+@click.argument("connection_string", required=False, default="")
+@click.pass_obj
+def collector(repo_config, action, collector_type, connection_string):
     """
     Add a collector to the project
-    :param collector_type: Type of collector (local, distant)
+    :param repo_config: Repository configuration
     :param action: Action to perform (add, remove)
-    :param destination: Destination of the collector
+    :param collector_type: Type of collector ('file', 'mongodb', etc)
+    :param connection_string: Connection information or path
     """
     # Load the repository configuration
-    repo_config = Config(repo_directory=".")
-    repo_config.load_config()
+    try:
+        repo_config.load_config()
+    except FileNotFoundError:
+        click.echo(Error_Messages['REPO_NOT_INITIALIZED'])
+        return
+    # end try
 
     # Action
     if action == 'add':
         # Create a new collector that to check
         # that information are correct
-        collector_new = collector_factory.get_collector(
-            collector_type,
-            destination
-        )
-
-        # Validate that the collector
-        # is working
-        collector_new.validate()
+        try:
+            collector_new = collector_factory.get_collector(
+                collector_type,
+                connection_string
+            )
+        except (KeyError, ValueError, Exception) as e:
+            click.echo(Error_Messages['CANNOT_GET_COLLECTOR'].format(connection_string, e))
+            exit(1)
+        # end try
 
         # Add new collector
-        repo_config.repo.add_collector(
-            CollectorConfig(
-                collector_type=collector_type,
-                collector_destination=destination
-            )
-        )
+        if repo_config.repo.contains_collector(collector_new):
+            click.echo("Error: repository already contains a collector with the same remote destination")
+            exit(1)
+        else:
+            repo_config.repo.add_collector(collector_new)
+        # end if
 
         # Save configuration
         repo_config.save_config()
+    # Test a collector (connection or path exists)
+    elif action == 'test':
+        # Go through all collectors
+        for collector in repo_config.repo.repo_collectors:
+            # Validate
+            try:
+                # Open and close to test
+                collector.open()
+                collector.close()
+            except Exception as e:
+                click.echo("Error: validating collector failed ({})".format(e))
+            finally:
+                click.echo("Collector {}:{} validated successfully!".format(
+                    collector.collector_type,
+                    collector.collector_connection_string
+                ))
+            # end try
+        # end for
     elif action == 'remove':
-        pass
+        # Remove collector
+        try:
+            repo_config.repo.remove_collector(collector_type, connection_string)
+        except Exception as e:
+            click.echo("Error removing collector: {}".format(e))
+            exit(1)
+        # end try
+
+        # Save configuration
+        repo_config.save_config()
     elif action == 'sync':
         pass
     elif action == 'update':
         pass
     else:
         click.echo("ERROR: unknown collector action: {}".format(action))
+        exit(1)
     # end if
 # end add_collector
 

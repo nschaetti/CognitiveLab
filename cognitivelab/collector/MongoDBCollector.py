@@ -39,21 +39,25 @@ class MongoDBCollector(Collector):
     """
 
     # Constructor
-    def __init__(self, destination):
+    def __init__(self, connection_string):
         """
         Constructor
-        :param destination: Destination of the collector
+        :param connection_string: Connection information to MongoDB
         """
         # Super
-        super(MongoDBCollector, self).__init__(destination)
+        super(MongoDBCollector, self).__init__("mongodb", connection_string)
 
-        # Get connection info
-        proto, host, port, database_name = self.get_connection_infos(destination)
+        # Parse information
+        connection_string_schema = self.get_connection_infos(connection_string)
+
+        # No db name?
+        if connection_string_schema.path == "":
+            raise Exception("Database name is empty")
+        # end if
 
         # Properties
-        self._host = host
-        self._port = int(port)
-        self._db_name = database_name
+        self._connection_string = connection_string
+        self._db_name = connection_string_schema.path[1:]
         self._client = None
         self._db = None
         self._connected = False
@@ -61,45 +65,25 @@ class MongoDBCollector(Collector):
 
     # region PROPERTIES
 
-    # Get host
+    # Get connection_string
     @property
-    def host(self):
+    def connection_string(self):
         """
-        Get host
+        Get connection_string
         :return: MongoDB server hostname
         """
-        return self._host
-    # end host
+        return self._connection_string
+    # end connection_string
 
     # Set host
-    @host.setter
-    def host(self, value):
+    @connection_string.setter
+    def connection_string(self, value):
         """
-        Set host
-        :param value: New hostname
+        Set connection_string
+        :param value: New connection_string
         """
-        self._host = value
-    # end host
-
-    # Get port
-    @property
-    def port(self):
-        """
-        Get port
-        :return: MongoDB host port
-        """
-        return self._port
-    # end port
-
-    # Set port
-    @port.setter
-    def port(self, value):
-        """
-        Set port
-        :param value: New MongoDB port
-        """
-        self._port = value
-    # end port
+        self._connection_string = value
+    # end connection_string
 
     # Get database
     @property
@@ -132,7 +116,8 @@ class MongoDBCollector(Collector):
         Open the collector
         """
         # Connection to MongoDB
-        self._client = MongoClient(self._host, self._port, connect=True)
+        # self._client = MongoClient(self._host, self._port, connect=True)
+        self._client = MongoClient(self._connection_string)
 
         # Get database
         self._db = self._client[self._db_name]
@@ -157,17 +142,6 @@ class MongoDBCollector(Collector):
         self._client.close()
         self._connected = False
     # end close
-
-    # Validate connector
-    def validate(self):
-        """
-        Validate connector
-        :return:
-        """
-        # Open and close the connection
-        self.open()
-        self.close()
-    # end validate
 
     # Get collector status
     def status(self):

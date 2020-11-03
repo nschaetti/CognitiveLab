@@ -22,7 +22,6 @@
 #
 
 # Imports
-from .Collector import Collector
 
 
 # Class to create and access Collector classes
@@ -48,6 +47,15 @@ class CollectorFactory(object):
 
     # region PUBLIC
 
+    # List of collector types
+    def collector_types(self):
+        """
+        List of collector types
+        :return: Collector types as a List
+        """
+        return self._collectors.keys()
+    # end collector_types
+
     # Register collector
     def register_collector(self, name, collector):
         """
@@ -60,30 +68,19 @@ class CollectorFactory(object):
     # end register_collector
 
     # Get a collector
-    def get_collector(self, collector_type, collector_destination):
+    def get_collector(self, collector_type, connection_string):
         """
         Get a collector
         :param collector_type:
-        :param collector_destination:
+        :param connection_string:
         :return:
         """
-        # Create depend on the type of collector
-        if collector_type == 'distant':
-            # Search for distant location in the destination
-            proto, _, _, _ = Collector.get_connection_infos(collector_destination)
-
-            # Check that there is one entry
-            collector_name = proto
-        else:
-            collector_name = 'file'
-        # end if
-
         # Create and returns collector
-        generator = self._collectors[collector_name]
-        if not generator:
-            raise ValueError(collector_name)
+        collector = self._collectors[collector_type]
+        if not collector:
+            raise ValueError(collector_type)
         # end if
-        return generator(collector_destination)
+        return collector(connection_string)
     # end get_collector
 
     # Get a collector from configuration
