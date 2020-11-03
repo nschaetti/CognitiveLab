@@ -25,6 +25,10 @@
 # Error messages
 Error_Messages = {
     'REPO_NOT_INITIALIZED': "Error: cannot find repository configuration, is this repository initialized?",
-    'CANNOT_GET_COLLECTOR': "Error: cannot get collector with connection string \"{}\""
+    'CANNOT_GET_COLLECTOR': "Error: cannot get collector with connection string \"{}\"",
+    'REPO_ALREADY_CONTAINS_COL': "Error: repository already contains a collector with the same remote destination",
+    'VALIDATE_COL_FAILED': "Error: validating collector failed ({})",
+    'ERROR_REMOVING_COL': "Error removing collector: {}",
+    'UNKOWN_COL_ACTION': "ERROR: unknown collector action: {}"
 }
 

@@ -1,5 +1,8 @@
-# File : config/__init__.py
-# Description : Repository configuration package init file
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# File : labs/schema/LaboratorySchema.py
+# Description : Schema for Laboratory objects
 # Author : Nils Schaetti <n.schaetti@gmail.com>
 # Date : 01.11.2020 23:44:00
 # Location : Nyon, Switzerland
@@ -22,8 +25,9 @@
 #
 
 # Imports
-from .Config import Config
-from .Repository import Repository
+from marshmallow import Schema, fields, post_load
 
-# ALL
-__all__ = ['Config', 'Repository']
+
+class LaboratorySchema(Schema):
+    pass
+# end LaboratorySchema

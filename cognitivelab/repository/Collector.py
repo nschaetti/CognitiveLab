@@ -26,6 +26,7 @@
 
 # Imports
 import re
+import datetime
 from urllib.parse import urlparse
 
 
@@ -40,7 +41,7 @@ class Collector(object):
     COLLECTOT_INITIALIZED = 1
 
     # Constructor
-    def __init__(self, collector_type, collector_connection_string):
+    def __init__(self, collector_type, collector_connection_string, collector_creation_date=None, collector_last_write_date=None):
         """
         Constructor
         :param collector_type: local or distant collector
@@ -49,6 +50,10 @@ class Collector(object):
         # Properties
         self._collector_type = collector_type
         self._collector_connection_string = collector_connection_string
+
+        # Creation date
+        self._creation_date = datetime.datetime.now() if collector_creation_date is None else collector_creation_date
+        self._last_write_date = collector_last_write_date
     # end __init__
 
     # region PROPERTIES
@@ -92,6 +97,36 @@ class Collector(object):
         :return:
         """
         self._collector_connection_string = v
+    # end collector_connection_string
+
+    # Get collector_creation_date
+    @property
+    def collector_creation_date(self):
+        """
+        Get collector_creation_date
+        :return: Collector creation date
+        """
+        return self._creation_date
+    # end collector_creation_date
+
+    # Get collector_last_write_date
+    @property
+    def collector_last_write_date(self):
+        """
+        Get collector_last_write_date
+        :return: Collector last write date
+        """
+        return self._last_write_date
+    # end collector_last_write_date
+
+    # Set collector_destination
+    @collector_last_write_date.setter
+    def collector_last_write_date(self, v):
+        """
+        Set collector_last_write_date
+        :return:
+        """
+        self._last_write_date = v
     # end collector_connection_string
 
     # endregion PROPERTIES

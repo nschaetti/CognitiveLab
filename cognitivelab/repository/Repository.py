@@ -26,6 +26,7 @@
 
 
 # Imports
+import datetime
 
 
 # Represent a repository in the configuration
@@ -35,7 +36,7 @@ class Repository(object):
     """
 
     # Constructor
-    def __init__(self, repo_name, repo_collectors=None):
+    def __init__(self, repo_name, repo_collectors=None, repo_creation_date=None, repo_modification_date=None):
         """
         Constructor
         :param repo_name: Repository name
@@ -43,6 +44,20 @@ class Repository(object):
         """
         # Repository name
         self._repo_name = repo_name
+
+        # Creation date
+        if repo_creation_date is None:
+            self._creation_date = datetime.datetime.now()
+        else:
+            self._creation_date = repo_creation_date
+        # end if
+
+        # Modification date
+        if repo_modification_date is None:
+            self._modification_date = datetime.datetime.now()
+        else:
+            self._modification_date = repo_modification_date
+        # end if
 
         # Repository collectors
         if repo_collectors is None:
@@ -94,9 +109,37 @@ class Repository(object):
         self._repo_collectors = value
     # end repo_collectors
 
+    # Get creation date
+    @property
+    def repo_creation_date(self):
+        """
+        Get creation date
+        :return: Creation date
+        """
+        return self._creation_date
+    # end repo_creation_date
+
+    # Get modification date
+    @property
+    def repo_modification_date(self):
+        """
+        Get modification date
+        :return: Modification date
+        """
+        return self._modification_date
+    # end repo_modification_date
+
     # endregion PROPERTIES
 
     # region PUBLIC
+
+    # Update modification date
+    def update_modification_date(self):
+        """
+        Update modification date
+        """
+        self._modification_date = datetime.datetime.now()
+    # end update_modification_date
 
     # Remove a collector
     def remove_collector(self, collector_type, collector_connection_string):

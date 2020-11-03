@@ -25,8 +25,8 @@
 # Imports
 import os
 import click
-from cognitivelab.collector import collector_factory
-from cognitivelab.config import Config
+from cognitivelab.repository import collector_factory
+from cognitivelab.repository import Config
 from .cli_messages import Error_Messages
 
 
@@ -35,7 +35,7 @@ COGNITIVELAB_REPO_MAIN_DIR = '.cognitivelab'
 COGNITIVELAB_REPO_DIRS = [
     'data',
     'datasets',
-    'lab',
+    'labs',
     'models'
 ]
 
@@ -93,7 +93,7 @@ def init(repo_config, repo_name):
 @click.argument("collector_type", required=False, default="")
 @click.argument("connection_string", required=False, default="")
 @click.pass_obj
-def collector(repo_config, action, collector_type, connection_string):
+def collector_command(repo_config, action, collector_type, connection_string):
     """
     Add a collector to the project
     :param repo_config: Repository configuration
@@ -125,7 +125,7 @@ def collector(repo_config, action, collector_type, connection_string):
 
         # Add new collector
         if repo_config.repo.contains_collector(collector_new):
-            click.echo("Error: repository already contains a collector with the same remote destination")
+            click.echo(Error_Messages['REPO_ALREADY_CONTAINS_COL'])
             exit(1)
         else:
             repo_config.repo.add_collector(collector_new)
@@ -143,7 +143,7 @@ def collector(repo_config, action, collector_type, connection_string):
                 collector.open()
                 collector.close()
             except Exception as e:
-                click.echo("Error: validating collector failed ({})".format(e))
+                click.echo(Error_Messages['VALIDATE_COL_FAILED'].format(e))
             finally:
                 click.echo("Collector {}:{} validated successfully!".format(
                     collector.collector_type,
@@ -151,12 +151,20 @@ def collector(repo_config, action, collector_type, connection_string):
                 ))
             # end try
         # end for
+    # List of collectors
+    elif action == 'list':
+        # Go through all collectors
+        for collector in repo_config.repo.repo_collectors:
+            click.echo("Collector type {} with connection {}".format(
+                collector.collector_type,
+                collector.collector_connection_string
+            ))
     elif action == 'remove':
         # Remove collector
         try:
             repo_config.repo.remove_collector(collector_type, connection_string)
         except Exception as e:
-            click.echo("Error removing collector: {}".format(e))
+            click.echo(Error_Messages['ERROR_REMOVING_COL'].format(e))
             exit(1)
         # end try
 
@@ -167,11 +175,45 @@ def collector(repo_config, action, collector_type, connection_string):
     elif action == 'update':
         pass
     else:
-        click.echo("ERROR: unknown collector action: {}".format(action))
+        click.echo(Error_Messages['UNKNOWN_COL_ACTION'].format(action))
         exit(1)
     # end if
 # end add_collector
 
+
+# Command to manage various labs in the repository
+@main.command("labs")
+@click.argument("action")
+@click.argument("lab_name")
+@click.pass_obj
+def labs_command(repo_config, action, lab_name):
+    """
+    Command o
+    :param repo_config: Repository configuration object
+    :param lab_name: Laboratory name
+    :return:
+    """
+    # Load the repository configuration
+    try:
+        repo_config.load_config()
+    except FileNotFoundError:
+        click.echo(Error_Messages['REPO_NOT_INITIALIZED'])
+        return
+    # end try
+
+    # Create a laboratory
+    if action == 'create':
+        # Create laboratory
+        try:
+            laboratory_new = repo_config.create_laboratory(lab_name)
+        except Exception as e:
+            click.echo("Cannot create laboratory: {}".format(e))
+            exit(1)
+        # end try
+
+        # Print success
+        click.echo("Laboratory created in {}".format(laboratory_new.lab_directory))
+    # end if
 
 @main.command("version")
 def main_version():

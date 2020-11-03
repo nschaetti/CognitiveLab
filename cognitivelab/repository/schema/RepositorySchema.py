@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# File : config/objects/schema/CollectorSchema.py
-# Description : Schema for a collector in the configuration
+# File : config/objects/schema/RepositorySchema.py
+# Description : Schema for a repository in the configuration
 # Author : Nils Schaetti <n.schaetti@gmail.com>
 # Date : 01.11.2020 23:44:00
 # Location : Nyon, Switzerland
@@ -24,49 +24,60 @@
 # Nils Schaetti <nils.schaetti@unige.ch>
 #
 
+
 # Imports
-from marshmallow import Schema, fields, post_load, validate
-from cognitivelab.collector import collector_factory
-from cognitivelab.collector.Collector import Collector
+from marshmallow import Schema, fields, post_load
+from cognitivelab.repository.schema import CollectorSchema
+from cognitivelab.repository.Repository import Repository
 
 
-# Schema for a collector in the configuration
-class CollectorSchema(Schema):
+# Schema for a repository in the configuration
+class RepositorySchema(Schema):
     """
-    Schema for a collector in the configuration
+    Schema for a repository in the configuration
     """
 
     # region FIELDS
 
-    # Collector type
-    collector_type = fields.Str(
-        required=True,
-        allow_none=False,
-        validate=validate.OneOf(collector_factory.collector_types())
-    )
-
-    # Collector connection string
-    collector_connection_string = fields.Str(
+    # Repository name
+    repo_name = fields.Str(
         required=True,
         allow_none=False
+    )
+
+    # Repository collectors
+    repo_collectors = fields.List(
+        fields.Nested(
+            CollectorSchema
+        ),
+        required=True,
+        allow_none=False
+    )
+
+    # Creation date
+    repo_creation_date = fields.DateTime(
+        required=True
+    )
+
+    # Modification date
+    repo_modification_date = fields.DateTime(
+        required=True
     )
 
     # endregion FIELDS
 
     # region PRIVATE
 
-    # Create Collector object
+    # Create Repository object
     @post_load
-    def _create_collector(self, data, **kwargs):
+    def _create_repository(self, data, **kwargs):
         """
         Create Collector object
         :param data:
         :param kwargs:
         :return:
         """
-        return Collector(**data)
-    # end _create_collector
+        return Repository(**data)
+    # end _create_repository
 
-    # endregion PRIVATE
-
-# end CollectorSchema
+# end RepositorySchema
