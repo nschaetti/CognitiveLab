@@ -159,28 +159,6 @@ class Config(object):
         # end with
     # end save_config
 
-    # Create laboratory
-    def create_laboratory(self, lab_name):
-        """
-        Create laboratory
-        :param lab_name: Laboratory name
-        :return: New Laboratory object
-        """
-        # Laboratory directory
-        lab_directory = os.path.join("labs", lab_name)
-
-        # If it does not exists
-        if not os.path.exists(lab_directory):
-            # Create directory
-            os.mkdir(lab_directory)
-
-            # Create config directory
-            os.mkdir(os.path.join(lab_directory, ".cognitivelab"))
-        else:
-            raise Exception("Laboratory directory already exists")
-        # end if
-    # end create_laboratory
-
     # endregion PUBLIC
 
     # region PRIVATE

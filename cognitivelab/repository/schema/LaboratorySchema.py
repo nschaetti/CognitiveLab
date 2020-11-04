@@ -28,6 +28,20 @@
 from marshmallow import Schema, fields, post_load
 
 
+# Schema for Laboratory objects
 class LaboratorySchema(Schema):
-    pass
+    """
+    Schema for Laboratory objects
+    """
+
+    # region FIELDS
+
+    # Lab name
+    lab_name = fields.Str(
+        required=True,
+        allow_none=False
+    )
+
+    # endregion FIELDS
+
 # end LaboratorySchema

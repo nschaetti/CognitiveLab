@@ -51,6 +51,7 @@ def main(ctx):
     ctx.obj = Config(repo_directory=".")
 # end main
 
+
 @main.command('init')
 @click.argument('repo_name')
 @click.pass_obj
@@ -190,8 +191,8 @@ def labs_command(repo_config, action, lab_name):
     """
     Command o
     :param repo_config: Repository configuration object
+    :param action: labs action to execute
     :param lab_name: Laboratory name
-    :return:
     """
     # Load the repository configuration
     try:
@@ -205,7 +206,7 @@ def labs_command(repo_config, action, lab_name):
     if action == 'create':
         # Create laboratory
         try:
-            laboratory_new = repo_config.create_laboratory(lab_name)
+            laboratory_new = repo_config.repo.create_laboratory(lab_name)
         except Exception as e:
             click.echo("Cannot create laboratory: {}".format(e))
             exit(1)
@@ -214,6 +215,8 @@ def labs_command(repo_config, action, lab_name):
         # Print success
         click.echo("Laboratory created in {}".format(laboratory_new.lab_directory))
     # end if
+# end labs_command
+
 
 @main.command("version")
 def main_version():
@@ -230,6 +233,8 @@ def main_license():
     Print CognitiveLab license
     :return:
     """
+# end main_license
+
 
 # Main
 if __name__ == '__main__':

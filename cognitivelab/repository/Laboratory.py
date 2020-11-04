@@ -25,6 +25,7 @@
 #
 
 # Imports
+import datetime
 
 
 # Manage a laboratory and its configuration
@@ -34,13 +35,17 @@ class Laboratory(object):
     """
 
     # Constructor
-    def __init__(self, lab_name):
+    def __init__(self, lab_name, lab_creation_date=None, lab_modification_date=None):
         """
         Constructor
         :param lab_name: Laboratory name
         """
         # Properties
         self._lab_name = lab_name
+
+        # Dates
+        self._lab_creation_date = datetime.datetime.now() if lab_creation_date is None else lab_creation_date
+        self._lab_modification_date = datetime.datetime.now() if lab_modification_date is None else lab_modification_date
     # end __init__
 
     # region PROPERTIES

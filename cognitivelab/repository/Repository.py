@@ -26,7 +26,9 @@
 
 
 # Imports
+import os
 import datetime
+from .Laboratory import Laboratory
 
 
 # Represent a repository in the configuration
@@ -45,19 +47,9 @@ class Repository(object):
         # Repository name
         self._repo_name = repo_name
 
-        # Creation date
-        if repo_creation_date is None:
-            self._creation_date = datetime.datetime.now()
-        else:
-            self._creation_date = repo_creation_date
-        # end if
-
-        # Modification date
-        if repo_modification_date is None:
-            self._modification_date = datetime.datetime.now()
-        else:
-            self._modification_date = repo_modification_date
-        # end if
+        # Creation and modification date
+        self._creation_date = datetime.datetime.now() if repo_creation_date is None else repo_creation_date
+        self._modification_date = datetime.datetime.now() if repo_modification_date is None else repo_modification_date
 
         # Repository collectors
         if repo_collectors is None:
@@ -65,6 +57,9 @@ class Repository(object):
         else:
             self._repo_collectors = repo_collectors
         # end if
+
+        # Repository labs
+        self._repo_labs = list()
     # end __init__
 
     # region PROPERTIES
@@ -129,6 +124,15 @@ class Repository(object):
         return self._modification_date
     # end repo_modification_date
 
+    # Set modification date
+    @repo_modification_date.setter
+    def repo_modification_date(self, value):
+        """
+        Set modification date
+        """
+        self._modification_date = value
+    # end repo_modification_date
+
     # endregion PROPERTIES
 
     # region PUBLIC
@@ -155,7 +159,7 @@ class Repository(object):
         # Go through all collectors
         for collector in self._repo_collectors:
             if collector.collector_type == collector_type and \
-                collector.collector_connection_string == collector_connection_string:
+               collector.collector_connection_string == collector_connection_string:
                 target_collector = collector
             # end if
         # end for
@@ -188,6 +192,40 @@ class Repository(object):
         """
         return collector in self._repo_collectors
     # end contain_collectors
+
+    # Create laboratory
+    def create_laboratory(self, lab_name):
+        """
+        Create laboratory
+        :param lab_name: Laboratory name
+        :return: New Laboratory object
+        """
+        # Laboratory directory
+        lab_directory = os.path.join("labs", lab_name)
+        lab_cgl_directory = os.path.join(lab_directory, ".cognitivelab")
+
+        # If it does not exists
+        if not os.path.exists(lab_directory):
+            # Create directory
+            os.mkdir(lab_directory)
+        # end if
+
+        # If no CGL dir in lab directory
+        if not os.path.exists(lab_cgl_directory):
+            # Create config directory
+            os.mkdir(lab_cgl_directory)
+        else:
+            raise Exception("Laboratory directory already exists ({})".format(lab_cgl_directory))
+        # end if
+
+        # Add to repository in the configuration
+        self._repo_labs.append(lab_name)
+
+        # Create the laboratory object
+        laboratory_new = Laboratory(lab_name=lab_name)
+
+        return laboratory_new
+    # end create_laboratory
 
     # endregion PUBLIC
 
