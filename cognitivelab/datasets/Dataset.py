@@ -1,5 +1,5 @@
 # File : config/__init__.py
-# Description : Dataset package init file
+# Description : Root dataset module
 # Author : Nils Schaetti <n.schaetti@gmail.com>
 # Date : 01.11.2020 23:44:00
 # Location : Nyon, Switzerland

@@ -1,7 +1,7 @@
-# File : config/__init__.py
-# Description : Dataset package init file
+# File : validation/__init__.py
+# Description : Validation package init file
 # Author : Nils Schaetti <n.schaetti@gmail.com>
-# Date : 01.11.2020 23:44:00
+# Date : 05.11.2020 00:45:00
 # Location : Nyon, Switzerland
 #
 # This file is part of the CognitiveLab package.
@@ -20,3 +20,5 @@
 #
 # Nils Schaetti <nils.schaetti@unige.ch>
 #
+
+
