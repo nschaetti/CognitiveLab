@@ -20,6 +20,12 @@ The CognitiveLab package consists of:
 
 ### Requirements
 
+* setuptools~=50.3.2
+* pymongo~=3.11.0
+* click~=7.1.2
+* pipenv~=2020.8.13
+* marshmallow~=3.9.0
+
 ### Installation
 
 ## Authors
