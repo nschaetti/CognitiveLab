@@ -11,13 +11,13 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="1000mm"
-   height="300mm"
-   viewBox="0 0 1000 300"
+   height="150mm"
+   viewBox="0 0 1000 150"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    sodipodi:docname="banner.svg"
-   enable-background="new">
+   style="enable-background:new">
   <defs
      id="defs2">
     <linearGradient
@@ -178,17 +178,17 @@
     </linearGradient>
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
-       inkscape:vp_x="-172.25376 : 269.93598 : 1"
+       inkscape:vp_x="-172.25376 : 269.93599 : 1"
        inkscape:vp_y="0 : 999.99998 : 0"
-       inkscape:vp_z="735.93172 : 223.91881 : 1"
+       inkscape:vp_z="735.93172 : 223.91882 : 1"
        inkscape:persp3d-origin="89.938408 : 77.482992 : 1"
        id="perspective833" />
     <inkscape:perspective
        id="perspective833-8"
-       inkscape:persp3d-origin="90.196631 : 180.36039 : 1"
-       inkscape:vp_z="261.11567 : 219.10487 : 1"
-       inkscape:vp_y="0 : 264.58334 : 0"
-       inkscape:vp_x="20.82494 : 231.28025 : 1"
+       inkscape:persp3d-origin="90.196631 : 180.3604 : 1"
+       inkscape:vp_z="261.11567 : 219.10488 : 1"
+       inkscape:vp_y="0 : 264.58335 : 0"
+       inkscape:vp_x="20.82494 : 231.28026 : 1"
        sodipodi:type="inkscape:persp3d" />
     <filter
        height="2.2583756"
@@ -689,13 +689,13 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,3)">
+     transform="translate(0,-147)">
     <g
        inkscape:export-ydpi="40.48"
        inkscape:export-xdpi="40.48"
        inkscape:label="Cube"
        id="g6632"
-       transform="matrix(2.4158501,0,0,2.4158501,398.44818,-95.296719)"
+       transform="matrix(2.4158501,0,0,2.4158501,486.13866,51.358043)"
        inkscape:highlight-color="2509608447"
        inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/banner.png">
       <g
@@ -1064,7 +1064,7 @@
     </g>
     <g
        inkscape:highlight-color="2509608447"
-       transform="matrix(0.71620199,0,0,0.71620199,462.14958,166.26761)"
+       transform="matrix(0.71620199,0,0,0.71620199,689.69125,399.10094)"
        id="g4216"
        inkscape:label="Icon"
        inkscape:export-xdpi="360"
@@ -1443,7 +1443,7 @@
        xml:space="preserve"
        id="flowRoot834"
        style="font-size:40px;line-height:0;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle"
-       transform="matrix(2.0052495,0,0,2.0052495,-2143.7282,-326.72476)"
+       transform="matrix(2.0052495,0,0,2.0052495,-2056.0377,-180.06999)"
        inkscape:label="Cognitive"
        inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/banner.png"
        inkscape:export-xdpi="40.48"
@@ -1458,8 +1458,8 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:'Roboto Light'">Cognitive</flowPara></flowRoot>    <text
        xml:space="preserve"
        style="font-size:80.28211975px;line-height:0;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;stroke-width:2.0070529"
-       x="635.39954"
-       y="105.95287"
+       x="723.09003"
+       y="252.60764"
        id="text844"
        inkscape:label="Lab"
        inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/banner.png"
@@ -1467,12 +1467,12 @@
        inkscape:export-ydpi="40.48"><tspan
          sodipodi:role="line"
          id="tspan842"
-         x="635.39954"
-         y="105.95287"
+         x="723.09003"
+         y="252.60764"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:'Roboto Light';stroke-width:2.0070529">Lab</tspan></text>
     <flowRoot
        inkscape:label="Cognitive"
-       transform="matrix(0.64157793,0,0,0.64157793,-570.37458,39.947974)"
+       transform="matrix(0.64157793,0,0,0.64157793,-342.83291,272.78131)"
        style="font-size:40px;line-height:0;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle"
        id="flowRoot6682"
        xml:space="preserve"
@@ -1491,7 +1491,7 @@
        inkscape:export-xdpi="360"
        inkscape:label="Icon"
        id="g6800"
-       transform="matrix(1.1527021,0,0,1.1527021,691.29385,235.00325)"
+       transform="matrix(1.1527021,0,0,1.1527021,918.83552,467.83658)"
        inkscape:highlight-color="2509608447"
        inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_small.png">
       <g
@@ -1868,7 +1868,7 @@
        inkscape:export-xdpi="360"
        inkscape:label="Icon"
        id="g6934"
-       transform="matrix(1.19525,0,0,1.19525,1003.5746,199.25094)"
+       transform="matrix(1.19525,0,0,1.19525,1231.1163,432.08427)"
        inkscape:highlight-color="2509608447"
        inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_height.png">
       <g
@@ -2244,7 +2244,7 @@
        xml:space="preserve"
        id="flowRoot6942"
        style="font-size:40px;line-height:0;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle"
-       transform="matrix(0.64157793,0,0,0.64157793,-288.13797,60.260459)"
+       transform="matrix(0.64157793,0,0,0.64157793,-60.596303,293.09379)"
        inkscape:label="Cognitive"
        inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_height.png"
        inkscape:export-xdpi="360"
@@ -2258,7 +2258,7 @@
          id="flowPara6940"
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:Roboto;-inkscape-font-specification:'Roboto Light'">Cognitive</flowPara></flowRoot>    <flowRoot
        inkscape:label="Cognitive"
-       transform="matrix(0.64157793,0,0,0.64157793,-319.14124,85.918334)"
+       transform="matrix(0.64157793,0,0,0.64157793,-91.599573,318.75166)"
        style="font-size:40px;line-height:0;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle"
        id="flowRoot6974"
        xml:space="preserve"
