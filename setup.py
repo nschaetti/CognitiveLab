@@ -1,12 +1,8 @@
 
 # Imports
-import os
-import platform
 import setuptools
-import subprocess
 import sys
 from setuptools import setup
-from setuptools.command.install import install
 
 
 #
