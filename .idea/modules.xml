@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CognitiveLab.iml" filepath="$PROJECT_DIR$/.idea/CognitiveLab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../TURING/Tools/EchoTorch/.idea/EchoTorch.iml" filepath="$PROJECT_DIR$/../../../TURING/Tools/EchoTorch/.idea/EchoTorch.iml" />
     </modules>
   </component>
 </project>
