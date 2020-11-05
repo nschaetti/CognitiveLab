@@ -691,8 +691,8 @@
      id="layer1"
      transform="translate(0,3)">
     <g
-       inkscape:export-ydpi="360"
-       inkscape:export-xdpi="360"
+       inkscape:export-ydpi="40.48"
+       inkscape:export-xdpi="40.48"
        inkscape:label="Cube"
        id="g6632"
        transform="matrix(2.4158501,0,0,2.4158501,398.44818,-95.296719)"
@@ -1068,7 +1068,8 @@
        id="g4216"
        inkscape:label="Icon"
        inkscape:export-xdpi="360"
-       inkscape:export-ydpi="360">
+       inkscape:export-ydpi="360"
+       inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_long.png">
       <g
          id="g6490"
          inkscape:label="Background"
@@ -1445,8 +1446,8 @@
        transform="matrix(2.0052495,0,0,2.0052495,-2143.7282,-326.72476)"
        inkscape:label="Cognitive"
        inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/banner.png"
-       inkscape:export-xdpi="360"
-       inkscape:export-ydpi="360"><flowRegion
+       inkscape:export-xdpi="40.48"
+       inkscape:export-ydpi="40.48"><flowRegion
          id="flowRegion836"><rect
            id="rect838"
            width="2002.1223"
@@ -1462,8 +1463,8 @@
        id="text844"
        inkscape:label="Lab"
        inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/banner.png"
-       inkscape:export-xdpi="360"
-       inkscape:export-ydpi="360"><tspan
+       inkscape:export-xdpi="40.48"
+       inkscape:export-ydpi="40.48"><tspan
          sodipodi:role="line"
          id="tspan842"
          x="635.39954"
@@ -1474,7 +1475,10 @@
        transform="matrix(0.64157793,0,0,0.64157793,-570.37458,39.947974)"
        style="font-size:40px;line-height:0;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle"
        id="flowRoot6682"
-       xml:space="preserve"><flowRegion
+       xml:space="preserve"
+       inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_long.png"
+       inkscape:export-xdpi="360"
+       inkscape:export-ydpi="360"><flowRegion
          id="flowRegion6678"><rect
            y="204.51793"
            x="181.82745"
@@ -1488,7 +1492,8 @@
        inkscape:label="Icon"
        id="g6800"
        transform="matrix(1.1527021,0,0,1.1527021,691.29385,235.00325)"
-       inkscape:highlight-color="2509608447">
+       inkscape:highlight-color="2509608447"
+       inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_small.png">
       <g
          transform="matrix(0.86451973,0,0,0.86451973,-555.54289,-79.48636)"
          style="opacity:0.90598288"
@@ -1864,7 +1869,8 @@
        inkscape:label="Icon"
        id="g6934"
        transform="matrix(1.19525,0,0,1.19525,1003.5746,199.25094)"
-       inkscape:highlight-color="2509608447">
+       inkscape:highlight-color="2509608447"
+       inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_height.png">
       <g
          transform="matrix(0.86451973,0,0,0.86451973,-555.54289,-79.48636)"
          style="opacity:0.90598288"
@@ -2239,7 +2245,10 @@
        id="flowRoot6942"
        style="font-size:40px;line-height:0;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle"
        transform="matrix(0.64157793,0,0,0.64157793,-288.13797,60.260459)"
-       inkscape:label="Cognitive"><flowRegion
+       inkscape:label="Cognitive"
+       inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_height.png"
+       inkscape:export-xdpi="360"
+       inkscape:export-ydpi="360"><flowRegion
          id="flowRegion6938"><rect
            id="rect6936"
            width="2002.1223"
@@ -2252,7 +2261,10 @@
        transform="matrix(0.64157793,0,0,0.64157793,-319.14124,85.918334)"
        style="font-size:40px;line-height:0;font-family:Roboto;-inkscape-font-specification:Roboto;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle"
        id="flowRoot6974"
-       xml:space="preserve"><flowRegion
+       xml:space="preserve"
+       inkscape:export-filename="/home/schaetti/Projets/CODING/Projets/CognitiveLab/images/icon_height.png"
+       inkscape:export-xdpi="360"
+       inkscape:export-ydpi="360"><flowRegion
          id="flowRegion6970"><rect
            y="204.51793"
            x="181.82745"
