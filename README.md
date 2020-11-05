@@ -42,3 +42,9 @@ If you find CognitiveLab useful for an academic publication, then please use the
   howpublished = {\url{https://github.com/nschaetti/CognitiveLab}},
 }
 ```
+
+## Medias
+
+<p align="center"><img src="https://raw.githubusercontent.com/nschaetti/CognitiveLab/develop/images/icon_small.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/nschaetti/CognitiveLab/develop/images/icon_long.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/nschaetti/CognitiveLab/develop/images/icon_height.png"/></p>
