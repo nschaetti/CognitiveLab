@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/nschaetti/CognitiveLab/blob/develop/images/banner2.png" /></p>
+<p align="center"><img src="https://github.com/nschaetti/CognitiveLab/blob/develop/images/banner.png" /></p>
 
 --------------------------------------------------------------------------------
 
