@@ -27,7 +27,7 @@
 
 # Imports
 from marshmallow import Schema, fields, post_load
-from cognitivelab.repository.schema import CollectorSchema
+from cognitivelab.repository.schema import CollectorSchema, RemoteDepotSchema
 from cognitivelab.repository.Repository import Repository
 
 
@@ -52,6 +52,11 @@ class RepositorySchema(Schema):
         ),
         required=True,
         allow_none=False
+    )
+
+    # Repository remote depots
+    repo_depots = fields.List(
+        fields.Nested(RemoteDepotSchema)
     )
 
     # Creation date

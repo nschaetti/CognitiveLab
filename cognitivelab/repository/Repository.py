@@ -38,11 +38,15 @@ class Repository(object):
     """
 
     # Constructor
-    def __init__(self, repo_name, repo_collectors=None, repo_creation_date=None, repo_modification_date=None):
+    def __init__(self, repo_name, repo_collectors=None, repo_depots=None, repo_creation_date=None,
+                 repo_modification_date=None):
         """
         Constructor
         :param repo_name: Repository name
         :param repo_collectors: List of CollectorConfig objects
+        :param repo_depots: List of remote depots
+        :param repo_creation_date: Creation date of the repository
+        :param repo_modification_date: Date of the last modification
         """
         # Repository name
         self._repo_name = repo_name
@@ -57,6 +61,13 @@ class Repository(object):
         else:
             self._repo_collectors = repo_collectors
         # end if
+
+        # List of remote depot
+        if repo_depots is None:
+            self._repo_depots = list()
+        else:
+            self._repo_depots = repo_depots
+        # end depot_list
 
         # Repository labs
         self._repo_labs = list()
@@ -103,6 +114,26 @@ class Repository(object):
         """
         self._repo_collectors = value
     # end repo_collectors
+
+    # Get depots
+    @property
+    def repo_depots(self):
+        """
+        Get remote depots
+        :return: List of remote depots (RemoteDepot)
+        """
+        return self._repo_depots
+    # end repo_depots
+
+    # Set collectors
+    @repo_depots.setter
+    def repo_depots(self, value):
+        """
+        Set remote depots
+        :param value: New list of RemoteDepot objects.
+        """
+        self._repo_depots = value
+    # end repo_depots
 
     # Get creation date
     @property
@@ -182,6 +213,15 @@ class Repository(object):
             self._repo_collectors.append(collector)
         # end if
     # end add_collector
+
+    # Add a depot
+    def add_depot(self, depot_new):
+        """
+        Add a depot
+        :param depot_new: New depot to be added
+        """
+        self._repo_depots.append(depot_new)
+    # end add_depot
 
     # Collector contained in the repository?
     def contains_collector(self, collector):

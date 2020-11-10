@@ -27,7 +27,8 @@ import os
 import click
 from cognitivelab.repository import collector_factory
 from cognitivelab.repository import Config
-from .cli_messages import Error_Messages
+from cognitivelab.repository import RemoteDepot
+from cognitivelab import Error_Messages
 
 
 # Directories to create in init phase
@@ -216,6 +217,46 @@ def labs_command(repo_config, action, lab_name):
         click.echo("Laboratory created in {}".format(laboratory_new.lab_directory))
     # end if
 # end labs_command
+
+
+# The depot command
+@main.command("depot")
+@click.argument("action")
+@click.argument("depot_location")
+@click.pass_obj
+def depot_command(repo_config, action, depot_location):
+    """
+    Depot command to interact with remote depot for dataset, validation, measures, and visualisation apps
+    :param repo_config: Repository configuration object
+    :param action: Depot action to execute
+    :param depot_location: Depot location
+    """
+    # Load the repository configuration
+    try:
+        repo_config.load_config()
+    except FileNotFoundError:
+        click.echo(Error_Messages['REPO_NOT_INITIALIZED'])
+        return
+    # end try
+
+    # Actions
+    # Update the depot
+    if action == 'update':
+        pass
+    elif action == 'add':
+        # Add to repository
+        repo_config.repo.add_depot(
+            RemoteDepot(remote_location=depot_location)
+        )
+
+        # Save configuration
+        repo_config.save_config()
+    elif action == 'create':
+        pass
+    elif action == 'get':
+        pass
+    # end if
+# end depot_command
 
 
 @main.command("version")

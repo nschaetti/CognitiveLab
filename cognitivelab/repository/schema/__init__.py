@@ -24,7 +24,8 @@
 # Imports
 from .CollectorSchema import CollectorSchema
 #from .LaboratorySchema import LaboratorySchema
+from .RemoteDepotSchema import RemoteDepotSchema
 from .RepositorySchema import RepositorySchema
 
 # ALL
-__all__ = ['CollectorSchema', 'RepositorySchema']
+__all__ = ['CollectorSchema', 'RemoteDepotSchema', 'RepositorySchema']

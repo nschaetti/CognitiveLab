@@ -29,8 +29,9 @@ from . import CollectorFactory
 from .CollectorFactory import collector_factory
 from . import Laboratory
 from . import MongoDBCollector
+from .RemoteDepot import RemoteDepot
 from . import schema
 
 # ALL
-__all__ = ['Config', 'Repository', 'Collector', 'CollectorFactory', 'MongoDBCollector', 'collector_factory',
-           'Laboratory', 'schema']
+__all__ = ['Config', 'RemoteDepot', 'Repository', 'Collector', 'CollectorFactory', 'MongoDBCollector',
+           'collector_factory', 'Laboratory', 'schema']
