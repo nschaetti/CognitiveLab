@@ -41,11 +41,8 @@ class RemoteDepotSchema(Schema):
     # Last update date
     last_update_date = fields.DateTime()
 
-    # Dataset depot
-    dataset_depot = fields.Dict(
-        keys=fields.Tuple(tuple_fields=[fields.Str(), fields.Str()]),
-        values=fields.Str()
-    )
+    # Locale DB
+    locale_db = fields.Str()
 
     # Dataset subdir
     dataset_subdir = fields.Str()

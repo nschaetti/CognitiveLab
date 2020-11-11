@@ -25,6 +25,8 @@
 # Imports
 import os
 import click
+import random
+import string
 from cognitivelab.repository import collector_factory
 from cognitivelab.repository import Config
 from cognitivelab.repository import RemoteDepot
@@ -222,7 +224,7 @@ def labs_command(repo_config, action, lab_name):
 # The depot command
 @main.command("depot")
 @click.argument("action")
-@click.argument("depot_location")
+@click.argument("depot_location", required=False)
 @click.pass_obj
 def depot_command(repo_config, action, depot_location):
     """
@@ -242,15 +244,43 @@ def depot_command(repo_config, action, depot_location):
     # Actions
     # Update the depot
     if action == 'update':
-        pass
+        # For each depot in the repository
+        for depot in repo_config.repo.repo_depots:
+            # Info
+            click.echo("Updating depots {}".format(depot.remote_location))
+
+            # Update depot
+            depot.update()
+        # end for
+
+        # Save configuration
+        repo_config.save_config()
+    elif action == 'upgrade':
+        # For each depot in the repository
+        for depot in repo_config.repo.repo_depots:
+            # Info
+            click.echo("Upgrading depots {}".format(depot.remote_location))
+
+            # Update depot
+            depot.upgrade()
+        # end for
     elif action == 'add':
+        # Create random local db
+        random_locale_db = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15)) + ".json"
+
         # Add to repository
         repo_config.repo.add_depot(
-            RemoteDepot(remote_location=depot_location)
+            RemoteDepot(
+                remote_location=depot_location,
+                locale_db=random_locale_db
+            )
         )
 
         # Save configuration
         repo_config.save_config()
+
+        # Log
+        click.echo("Remote depot registered, now use the update command to download the index.")
     elif action == 'create':
         pass
     elif action == 'get':

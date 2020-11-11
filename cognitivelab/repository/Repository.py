@@ -223,6 +223,16 @@ class Repository(object):
         self._repo_depots.append(depot_new)
     # end add_depot
 
+    # Remove a depot
+    def remove_depot(self, depot_obj):
+        """
+        Remove a depot
+        :param depot_obj:
+        :return:
+        """
+        self._repo_depots.delete(depot_obj)
+    # end remove_depot
+
     # Collector contained in the repository?
     def contains_collector(self, collector):
         """
