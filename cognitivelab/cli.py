@@ -276,7 +276,7 @@ def depot_command(repo_config, action, depot_location):
             )
         )
 
-        # Save configuration
+        # Save configuration--
         repo_config.save_config()
 
         # Log
