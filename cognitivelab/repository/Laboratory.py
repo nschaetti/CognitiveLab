@@ -25,7 +25,9 @@
 #
 
 # Imports
+import os
 import datetime
+import configparser
 
 
 # Manage a laboratory and its configuration
@@ -35,13 +37,17 @@ class Laboratory(object):
     """
 
     # Constructor
-    def __init__(self, lab_name, lab_creation_date=None, lab_modification_date=None):
+    def __init__(self, lab_name, lab_directory, lab_creation_date=None, lab_modification_date=None):
         """
         Constructor
         :param lab_name: Laboratory name
+        :param lab_directory: Laboratory directory
+        :param lab_creation_date: Date and time of the creation of the laboratory
+        :param lab_modification_date: Date and time of the last modification of the laboratory
         """
         # Properties
         self._lab_name = lab_name
+        self._lab_directory = lab_directory
 
         # Dates
         self._lab_creation_date = datetime.datetime.now() if lab_creation_date is None else lab_creation_date
@@ -69,6 +75,85 @@ class Laboratory(object):
         self._lab_name = value
     # end lab_name
 
+    # Get lab directory
+    @property
+    def lab_directory(self):
+        """
+        Get lab directory
+        :return: Lab directory
+        """
+        return self._lab_directory
+    # end lab_directory
+
+    # Set lab directory
+    @lab_directory.setter
+    def lab_directory(self, value):
+        """
+        Set lab directory
+        :param value: New path for the lab
+        """
+        self._lab_directory = value
+    # end lab_directory
+
     # endregion PROPERTIES
+
+    # region PUBLIC
+
+    # Create an empty configuration file
+    def create_config_file(self):
+        """
+        Create an empty configuration file
+        """
+        # Config parser
+        default_config = configparser.ConfigParser()
+
+        # Default section
+        default_config['data'] = {}
+        default_config['evaluation'] = {}
+
+        # Write file
+        with open(os.path.join(self._lab_directory, ".cognitivelab", "config"), "w") as c_file:
+            default_config.write(c_file)
+        # end with
+    # end create_config_file
+
+    # endregion PUBLIC
+
+    # region STATIC
+
+    # Initialise a new laboratory
+    @staticmethod
+    def initialize(lab_name, cl_dir, repo):
+        """
+        Initialize a new laboratory
+        :param lab_name: New laboratory name
+        :param cl_dir: CognitiveLab root directory
+        :param repo: Repository object to be updated
+        :return: Laboratory object
+        """
+        # Laboratory directory
+        lab_directory = os.path.join(cl_dir, lab_name)
+        lab_cgl_directory = os.path.join(lab_directory, ".cognitivelab")
+
+        # If it does not exists
+        if not os.path.exists(lab_directory):
+            # Create directory
+            os.mkdir(lab_directory)
+        # end if
+
+        # If no CGL dir in lab directory
+        if not os.path.exists(lab_cgl_directory):
+            # Create config directory
+            os.mkdir(lab_cgl_directory)
+        else:
+            raise Exception("Laboratory directory already exists ({})".format(lab_cgl_directory))
+        # end if
+
+        # Create the laboratory object
+        laboratory_new = Laboratory(lab_name=lab_name, lab_directory=lab_directory)
+
+        return laboratory_new
+
+    # endregion STATIC
 
 # end Laboratory

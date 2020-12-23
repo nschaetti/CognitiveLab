@@ -272,7 +272,7 @@ class Repository(object):
         self._repo_labs.append(lab_name)
 
         # Create the laboratory object
-        laboratory_new = Laboratory(lab_name=lab_name)
+        laboratory_new = Laboratory(lab_name=lab_name, lab_directory=lab_directory)
 
         return laboratory_new
     # end create_laboratory
