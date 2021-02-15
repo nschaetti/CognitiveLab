@@ -27,6 +27,9 @@ import os
 import click
 import random
 import string
+import sys
+
+# CL imports
 from cognitivelab.repository import collector_factory
 from cognitivelab.repository import Config
 from cognitivelab.repository import RemoteDepot
@@ -62,8 +65,6 @@ def main(ctx):
 def init(repo_config, repo_name):
     """
     Init the current directory as a CognitiveLab project directory.
-    :param repo_config: Repository configuration
-    :param repo_name: Repository name for initialisation
     """
     # Check that there is no .cognitivelabs directory
     if os.path.exists(COGNITIVELAB_REPO_MAIN_DIR):
@@ -100,11 +101,7 @@ def init(repo_config, repo_name):
 @click.pass_obj
 def collector_command(repo_config, action, collector_type, connection_string):
     """
-    Add a collector to the project
-    :param repo_config: Repository configuration
-    :param action: Action to perform (add, remove)
-    :param collector_type: Type of collector ('file', 'mongodb', etc)
-    :param connection_string: Connection information or path
+    Manage and add collector which store and share the results of experiments.
     """
     # Load the repository configuration
     try:
@@ -181,7 +178,7 @@ def collector_command(repo_config, action, collector_type, connection_string):
         pass
     else:
         click.echo(Error_Messages['UNKNOWN_COL_ACTION'].format(action))
-        exit(1)
+        sys.exit(1)
     # end if
 # end add_collector
 
@@ -193,10 +190,8 @@ def collector_command(repo_config, action, collector_type, connection_string):
 @click.pass_obj
 def labs_command(repo_config, action, lab_name):
     """
-    Command o
-    :param repo_config: Repository configuration object
-    :param action: labs action to execute
-    :param lab_name: Laboratory name
+    Manage and create laboratories which aggregate experiments based on the same
+    task and evaluation.
     """
     # Load the repository configuration
     try:
@@ -213,11 +208,17 @@ def labs_command(repo_config, action, lab_name):
             laboratory_new = repo_config.repo.create_laboratory(lab_name)
         except Exception as e:
             click.echo("Cannot create laboratory: {}".format(e))
-            exit(1)
+            sys.exit(1)
         # end try
+
+        # Create configuration file
+        laboratory_new.create_config_file()
 
         # Print success
         click.echo("Laboratory created in {}".format(laboratory_new.lab_directory))
+    else:
+        click.echo(Error_Messages['UNKNOWN_LABS_ACTION'].format(action))
+        sys.exit(1)
     # end if
 # end labs_command
 

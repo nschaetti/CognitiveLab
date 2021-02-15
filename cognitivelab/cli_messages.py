@@ -29,6 +29,8 @@ Error_Messages = {
     'REPO_ALREADY_CONTAINS_COL': "Error: repository already contains a collector with the same remote destination",
     'VALIDATE_COL_FAILED': "Error: validating collector failed ({})",
     'ERROR_REMOVING_COL': "Error removing collector: {}",
-    'UNKOWN_COL_ACTION': "ERROR: unknown collector action: {}"
+    'UNKNOWN_COL_ACTION': "ERROR: unknown collector action: {}",
+    'UNKNOWN_LABS_ACTION': "ERROR: unknown labs actions: {}",
+    'LAB_ALREADY_EXISTS': "Laboratory directory already exists ({})"
 }
 
