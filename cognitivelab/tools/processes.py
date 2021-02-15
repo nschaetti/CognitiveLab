@@ -1,7 +1,10 @@
-# File : __init__.py
-# Description : CognitiveLab main init file
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# File : cli.py
+# Description : Command line handler for CognitiveLab
 # Author : Nils Schaetti <n.schaetti@gmail.com>
-# Date : 01.11.2020 23:44:00
+# Date : 30.10.2020 15:55:00
 # Location : Nyon, Switzerland
 #
 # This file is part of the CognitiveLab package.
@@ -18,16 +21,27 @@
 # You should have received a copy of the GNU General Public License
 # along with CognitiveLab.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Nils Schaetti <nils.schaetti@unige.ch>
-#
 
 # Imports
-from .cli_messages import Error_Messages
-from .debug_tools import echo
-from . import datasets
-from . import labs
-from . import repository
-from . import tools
+import importlib
 
-# ALL
-__all__ = ['echo', 'Error_Messages', 'datasets', 'labs', 'repository', 'tools']
+
+# Load experiment class from target module
+def load_xp_class(module_path, xp_class_name, package='.'):
+    """
+    Load experiment class from target module
+    :param module_path: Path to module
+    :param xp_class_name: Experiment class
+    :param package:
+    """
+    # Load module
+    xp_module = importlib.import_module(module_path, package)
+
+    # Get class
+    xp_class = getattr(xp_module, xp_class_name)
+
+    # Create object
+    xp_obj = xp_class()
+
+    return xp_obj
+# end launch_script

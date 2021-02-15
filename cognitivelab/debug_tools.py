@@ -1,7 +1,10 @@
-# File : __init__.py
-# Description : CognitiveLab main init file
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# File : debug_tools.py
+# Description : Debug tools for Cognitive Lab
 # Author : Nils Schaetti <n.schaetti@gmail.com>
-# Date : 01.11.2020 23:44:00
+# Date : 12.02.2020 14:56:00
 # Location : Nyon, Switzerland
 #
 # This file is part of the CognitiveLab package.
@@ -18,16 +21,14 @@
 # You should have received a copy of the GNU General Public License
 # along with CognitiveLab.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Nils Schaetti <nils.schaetti@unige.ch>
-#
 
-# Imports
-from .cli_messages import Error_Messages
-from .debug_tools import echo
-from . import datasets
-from . import labs
-from . import repository
-from . import tools
 
-# ALL
-__all__ = ['echo', 'Error_Messages', 'datasets', 'labs', 'repository', 'tools']
+# Print message
+def echo(message, level=0):
+    """
+    Print message
+    :param message: Message
+    :param level: Debug level
+    """
+    print("[{}]: {}".format(message, level))
+# end print

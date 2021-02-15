@@ -30,6 +30,7 @@ import string
 from cognitivelab.repository import collector_factory
 from cognitivelab.repository import Config
 from cognitivelab.repository import RemoteDepot
+from cognitivelab.tools import load_xp_class
 from cognitivelab import Error_Messages
 
 
@@ -43,7 +44,7 @@ COGNITIVELAB_REPO_DIRS = [
 ]
 
 
-@click.group('main', chain=True)
+@click.group('main')
 @click.pass_context
 def main(ctx):
     """
@@ -287,6 +288,34 @@ def depot_command(repo_config, action, depot_location):
         pass
     # end if
 # end depot_command
+
+
+# Command to deal with the Alogo backend
+@main.command("run")
+@click.argument("action")
+@click.argument("module_name")
+@click.argument("class_name")
+@click.option('-p', '--package', default='labs', help='Base package containing experiments')
+@click.option('--daemon/--no-nodaemon', default=False)
+@click.option('-v', '--verbose', count=True)
+def run_command(action, module_name, class_name, package, daemon, verbose):
+    """
+    Command to deal with the Alogo backend
+
+    Action:
+    - Download: download the dataset
+    """
+    # Action
+    if action == "launch":
+        # Daemon or not
+        if daemon:
+            # Load experiment class
+            load_xp_class(module_name, class_name, package)
+        else:
+            os.spawnlp(os.P_WAIT, 'cognitivelab', 'run', module_name, class_name, package, True, verbose)
+        # end if
+    # end if
+# end run_command
 
 
 @main.command("version")

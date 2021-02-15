@@ -1,7 +1,10 @@
-# File : __init__.py
-# Description : CognitiveLab main init file
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# File : print_logs.py
+# Description : Just print some logs
 # Author : Nils Schaetti <n.schaetti@gmail.com>
-# Date : 01.11.2020 23:44:00
+# Date : 12.02.2021 14:54:00
 # Location : Nyon, Switzerland
 #
 # This file is part of the CognitiveLab package.
@@ -18,16 +21,17 @@
 # You should have received a copy of the GNU General Public License
 # along with CognitiveLab.  If not, see <http://www.gnu.org/licenses/>.
 #
-# Nils Schaetti <nils.schaetti@unige.ch>
-#
+
 
 # Imports
-from .cli_messages import Error_Messages
-from .debug_tools import echo
-from . import datasets
-from . import labs
-from . import repository
-from . import tools
+import cognitivelab as cg
+import cognitivelab.labs as cgl
 
-# ALL
-__all__ = ['echo', 'Error_Messages', 'datasets', 'labs', 'repository', 'tools']
+
+# Class CGExp
+class CGExp(cgl.CognitiveXP):
+    """
+    Test
+    """
+    pass
+# end CGExp

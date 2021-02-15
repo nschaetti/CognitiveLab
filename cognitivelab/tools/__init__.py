@@ -22,3 +22,10 @@
 #
 
 
+# Import
+from .processes import load_xp_class
+
+# ALL
+__all__ = ['load_xp_class']
+
+
